@@ -7,7 +7,7 @@ import ru.netology.repository.CaseFlightRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FlightManagerTest {
+public class FlightManagerTest {
     private CaseFlightRepository repository = new CaseFlightRepository();
     private FlightManager manager =new FlightManager(repository);
     private CaseFlight first = new CaseFlight(1, 1299, "SVO", "KZN", 95);
@@ -24,7 +24,7 @@ class FlightManagerTest {
     }
 
     @Test
-    void searchAll() {
+    public void searchAll() {
         CaseFlight[] actual = manager.searchAll("VKO", "KZN");
         CaseFlight[] expected = new CaseFlight[] {second, third};
         assertArrayEquals(expected, actual);
