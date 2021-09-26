@@ -19,7 +19,7 @@ public class FlightManager {
     public CaseFlight[] searchAll(String flightFrom, String flightTo) {
         CaseFlight[] result = new CaseFlight[0];
         for (CaseFlight caseFlight : repository.findAll()) {
-            if (caseFlight.getFlightIn() == flightTo && caseFlight.getFlightOut() == flightFrom) {
+            if (caseFlight.getFlightIn().equals(flightTo) && caseFlight.getFlightOut().equals(flightFrom)) {
                 CaseFlight[] tmp = new CaseFlight[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = caseFlight;
