@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.CaseFlight;
 import ru.netology.repository.CaseFlightRepository;
 
+import java.util.Comparator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FlightManagerTest {
@@ -19,6 +21,7 @@ public class FlightManagerTest {
     private CaseFlight seventh = new CaseFlight(7, 3209, "SVO", "UFA", 120);
     private CaseFlight eighth = new CaseFlight(8, 3215, "SVO", "UFA", 110);
     private CaseFlight nineth = new CaseFlight(9, 3415, "SMO", "UFA", 110);
+    FlightByTimeFlightAsComparator comparator = new FlightByTimeFlightAsComparator();
 
     @BeforeEach
     public void setUp() {
@@ -35,28 +38,29 @@ public class FlightManagerTest {
 
     @Test
     public void sholdSearchAllWithFlightOutAndFlightIn() {
-        CaseFlight[] actual = manager.searchAll("SVO", "UFA");
-        CaseFlight[] expected = new CaseFlight[] {seventh, eighth};
+        CaseFlight[] actual = manager.searchAll("SVO", "UFA", (Comparator<CaseFlight>) comparator);
+        CaseFlight[] expected = new CaseFlight[] {eighth, seventh};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldSearchAllWithFlightOutAndWithoutFlightIn() {
-        CaseFlight[] actual = manager.searchAll("SVO", "WED");
+        CaseFlight[] actual = manager.searchAll("SVO", "WED", (Comparator<CaseFlight>
+                ) comparator);
         CaseFlight[] expected = new CaseFlight[] {};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldSearchAllWithoutFlightOutAndWithFlightIn() {
-        CaseFlight[] actual = manager.searchAll("RJC", "UFA");
+        CaseFlight[] actual = manager.searchAll("RJC", "UFA", (Comparator<CaseFlight>) comparator);
         CaseFlight[] expected = new CaseFlight[] {};
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldSearchAllWithoutFlightOutAndWithoutFlightIn() {
-        CaseFlight[] actual = manager.searchAll("RJC", "WMD");
+        CaseFlight[] actual = manager.searchAll("RJC", "WMD", (Comparator<CaseFlight>) comparator);
         CaseFlight[] expected = new CaseFlight[] {};
         assertArrayEquals(expected, actual);
     }

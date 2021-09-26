@@ -4,6 +4,7 @@ import ru.netology.domain.CaseFlight;
 import ru.netology.repository.CaseFlightRepository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class FlightManager {
     private CaseFlightRepository repository;
@@ -16,7 +17,7 @@ public class FlightManager {
         repository.save(item);
     }
 
-    public CaseFlight[] searchAll(String flightFrom, String flightTo) {
+    public CaseFlight[] searchAll(String flightFrom, String flightTo, Comparator<CaseFlight> comparator) {
         CaseFlight[] result = new CaseFlight[0];
         for (CaseFlight caseFlight : repository.findAll()) {
             if (caseFlight.getFlightIn().equals(flightTo) && caseFlight.getFlightOut().equals(flightFrom)) {
@@ -26,7 +27,7 @@ public class FlightManager {
                 result = tmp;
             }
         }
-        Arrays.sort(result);
+        Arrays.sort(result, comparator);
         return result;
     }
 }
