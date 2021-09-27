@@ -18,25 +18,31 @@ public class FlightManagerTest {
     private CaseFlight sixth = new CaseFlight(6, 3201, "VKO", "UFA", 120);
     private CaseFlight seventh = new CaseFlight(7, 3209, "SVO", "UFA", 120);
     private CaseFlight eighth = new CaseFlight(8, 3215, "SVO", "UFA", 110);
-    private CaseFlight nineth = new CaseFlight(9, 3415, "SMO", "UFA", 110);
+    private CaseFlight ninth = new CaseFlight(9, 3415, "SMO", "UFA", 110);
+    private CaseFlight tenth = new CaseFlight(10, 3715, "SVO", "UFA", 100);
+    private CaseFlight eleventh = new CaseFlight(11, 4215, "SVO", "UFA", 99);
+    private CaseFlight twelfth = new CaseFlight(12, 5215, "SVO", "UFA", 97);
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() { // Добавляем в менеджер в произвольном порядке
         manager.add(fifth);
+        manager.add(tenth);
+        manager.add(eleventh);
         manager.add(first);
         manager.add(eighth);
         manager.add(fourth);
         manager.add(seventh);
         manager.add(third);
         manager.add(sixth);
-        manager.add(nineth);
+        manager.add(twelfth);
+        manager.add(ninth);
         manager.add(second);
     }
 
     @Test
     public void sholdSearchAllWithFlightOutAndFlightIn() {
         CaseFlight[] actual = manager.searchAll("SVO", "UFA");
-        CaseFlight[] expected = new CaseFlight[] {seventh, eighth};
+        CaseFlight[] expected = new CaseFlight[] {seventh, eighth, tenth, eleventh, twelfth};
         assertArrayEquals(expected, actual);
     }
 
